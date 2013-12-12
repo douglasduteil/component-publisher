@@ -1,0 +1,29 @@
+{
+  "name": "component-publisher",
+  "version": "0.0.14",
+  "description": "A node stuff to publish components on github and bower",
+  "dependencies": {
+    "conventional-changelog-wrapper": "douglasduteil/conventional-changelog-wrapper",
+    "dateformat": "*",
+    "event-stream": "*",
+    "gulp": "*",
+    "gulp-header": "douglasduteil/gulp-header",
+    "gulp-rename": "*",
+    "gulp-rimraf": "*",
+    "gulp-util": "*",
+    "lodash.after": "*",
+    "lodash.assign": "*",
+    "lodash.template": "*",
+    "ngmin": "*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/douglasduteil/component-publisher.git"
+  },
+  "author": "Douglas Duteil",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/douglasduteil/component-publisher/issues"
+  },
+  "homepage": "https://github.com/douglasduteil/component-publisher"
+}
