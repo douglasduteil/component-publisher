@@ -66,7 +66,7 @@ gulp.task('build_ghpages', function(done){
 // BUILD MISC
 //////////////////////////////////////////////////////////////////////////////
 
-gulp.task('changelog', function(){
+gulp.task('changelog', function(done){
   changelogWrapper.generate()
     .pipe(
       cm.es.map(function fakeFile(content, cb){
@@ -77,7 +77,8 @@ gulp.task('changelog', function(){
       })
     )
     .pipe(cm.header('# <%= public.humaName %> - CHANGELOG', cm))
-    .pipe(gulp.dest(_public + '/'));
+    .pipe(gulp.dest(_public + '/'))
+    .on('end', done);
 });
 
 
