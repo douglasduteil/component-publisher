@@ -1,6 +1,6 @@
 {
   "name": "component-publisher",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "A node stuff to publish components on github and bower",
   "dependencies": {
     "conventional-changelog-wrapper": "douglasduteil/conventional-changelog-wrapper",
@@ -14,7 +14,8 @@
     "lodash.after": "*",
     "lodash.assign": "*",
     "lodash.template": "*",
-    "ngmin": "*"
+    "ngmin": "*",
+    "shelljs": "*"
   },
   "repository": {
     "type": "git",
