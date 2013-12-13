@@ -3,6 +3,7 @@
 var gulp = require('gulp');
 var cm = require('./lib/common');
 cm.public = require('../../publish.js')();
+cm.bwr = require('../../bower.json');
 
 // More libs !
 var changelogWrapper = require('conventional-changelog-wrapper');
@@ -63,6 +64,29 @@ gulp.task('build_ghpages', function(done){
 
 
 //////////////////////////////////////////////////////////////////////////////
+// BUILD BOWER
+//////////////////////////////////////////////////////////////////////////////
+
+gulp.task('build_bower', function(done){
+
+  var almostDone = cm._.after( 3, done);
+
+  gulp.src('./branch/bower/.travis.yml')
+    .pipe(gulp.dest(_public + '/bower/'))
+    .on('end', almostDone);
+
+  gulp.src('./branch/bower/bower.tmpl.json')
+    .pipe(cm.processTemplateFile())
+    .pipe(cm.rename({ext : '.json'}))
+    .pipe(gulp.dest(_public + '/bower/'))
+    .on('end', almostDone);
+
+  gulp.src('../../dist/**')
+    .pipe(gulp.dest(_public + '/bower/'))
+    .on('end', almostDone);
+});
+
+//////////////////////////////////////////////////////////////////////////////
 // BUILD MISC
 //////////////////////////////////////////////////////////////////////////////
 
@@ -89,6 +113,9 @@ gulp.task('changelog', function(done){
 gulp.task('ghpages', function(cb){
   gulp.run('build_ghpages', cb);
 });
+
+gulp.task('bower', function(cb){
+  gulp.run('build_bower', cb);
 });
 
 
