@@ -25,7 +25,7 @@ gulp.task('clean', function(done) {
 // BUILD GH-PAGE
 //////////////////////////////////////////////////////////////////////////////
 
-gulp.task('build_ghpage', function(done){
+gulp.task('build_ghpages', function(done){
 
   if (!cm.public.tocopy)  cm.public.tocopy = [];
   var almostDone = cm._.after( 5 + cm.public.tocopy.length, done);
@@ -85,8 +85,9 @@ gulp.task('changelog', function(){
 // TASKS
 //////////////////////////////////////////////////////////////////////////////
 
-gulp.task('ghpages', ['clean'], function(cb){
-  gulp.run('changelog', 'build_ghpage', cb);
+gulp.task('ghpages', function(cb){
+  gulp.run('build_ghpages', cb);
+});
 });
 
 
