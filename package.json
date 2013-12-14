@@ -1,6 +1,6 @@
 {
   "name": "component-publisher",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "A node stuff to publish components on github and bower",
   "dependencies": {
     "conventional-changelog-wrapper": "douglasduteil/conventional-changelog-wrapper",

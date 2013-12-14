@@ -30,7 +30,28 @@ gulp.task('build_gh-pages', build.ghpages);
 gulp.task('build_bower', build.bower);
 
 
-gulp.task('publish_gh-pages', publish);
+var allowPushOnRepo = (process.env.TRAVIS == 'true') && (process.env.TRAVIS_PULL_REQUEST == 'false') && (process.env.TRAVIS_BRANCH == 'develop') && true;
+gulp.task('publish_gh-pages', function(cb){
+  if (process.env.TRAVIS){
+    publish.apply(this, [{
+      push: allowPushOnRepo,
+      message: 'Travis commit : build ' + process.env.TRAVIS_BUILD_NUMBER
+    }, cb]);
+  }else{
+    publish.apply(this, [cb]);
+  }
+});
+
+gulp.task('publish_bower', function(cb){
+  if (process.env.TRAVIS){
+    publish.apply(this, [{
+      push: allowPushOnRepo,
+      message: 'Travis commit : build ' + process.env.TRAVIS_BUILD_NUMBER
+    }, cb]);
+  }else{
+    publish.apply(this, [cb]);
+  }
+});
 
 
 function prefixedBranchedTasks(prefix){
