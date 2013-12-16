@@ -1,3 +1,32 @@
+#!/bin/sh
+
+MAIN_BRANCH="master"
+
+
+while [ "$1" != "" ]; do
+  PARAM=`echo $1 | awk -F= '{print $1}'`
+  VALUE=`echo $1 | awk -F= '{print $2}'`
+  case $PARAM in
+    -h | --help)
+      echo "By default this script run only on the main branch : $MAIN_BRANCH"
+      echo "Use -b or --branch to change it."
+      echo "authentication.sh --branch=develop"
+      echo ""
+      exit 0
+      ;;
+    --branch)
+      MAIN_BRANCH=$VALUE
+      ;;
+    *)
+      echo "ERROR: unknown parameter \"$PARAM\""
+      usage
+      exit 1
+      ;;
+  esac
+  shift
+done
+
+[  "$TRAVIS_PULL_REQUEST" != "false" ] || [  "$TRAVIS_BRANCH" != "$MAIN_BRANCH" ] && exit 0
 
 #
 # Authentication
