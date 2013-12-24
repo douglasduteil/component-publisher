@@ -1,5 +1,5 @@
 ---
 # blacklist the bower branch
 branches:
-  except:
-    - bower
+  only:
+    - master
