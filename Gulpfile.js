@@ -34,6 +34,7 @@ var allowPushOnRepo = (process.env.TRAVIS == 'true') && (process.env.TRAVIS_PULL
 gulp.task('publish_gh-pages', function(cb){
   if (process.env.TRAVIS){
     publish.apply(this, [{
+      tag:  false,
       push: allowPushOnRepo,
       message: 'Travis commit : build ' + process.env.TRAVIS_BUILD_NUMBER
     }, cb]);
