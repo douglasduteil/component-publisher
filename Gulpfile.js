@@ -44,8 +44,6 @@ gulp.task('publish_gh-pages', function(cb){
 });
 
 gulp.task('publish_bower', function(cb){
-  console.log(process.env.TRAVIS, process.env.TRAVIS_PULL_REQUEST, process.env.TRAVIS_BRANCH);
-  console.log('Can push', allowPushOnRepo);
   if (process.env.TRAVIS){
     publish.apply(this, [
     {
