@@ -25,6 +25,24 @@ The goal of all this is to automatize the construction of this type of repo tree
 
 So the `master` branch is free of builds files, the `gh-pages` branch is free of source files and the `bower` branches are only containing the vital part of a component. This way if a repo produces separate components, I could simply create multiple bower-branches for each produced component. Like for the component `subcomponent-a`, the branch `bower-subcomponent-a` with the specific version tags prefixed with `bower-subcomponent-a-`
 
+Like so, throw bower you can install
+```sh
+# All the repo
+bower install <package>#master
+
+# The latest bower build
+bower install <package>#bower
+
+# A specific bower build
+bower install <package>#v0.0.8
+
+# The latest bower build of a sub component
+bower install <package>#bower-subcomponent-a
+
+# A specific bower build of a sub component
+bower install <package>#subcomponent-a-0.0.8
+```
+
 ## Usage
 
 Add it as a npm component:
