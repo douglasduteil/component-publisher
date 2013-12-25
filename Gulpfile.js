@@ -70,8 +70,8 @@ gulp.task('publish_subbower', function(done){
     var mName = moduleNames[i];
     publish.apply(this, [{
       branch: 'bower-' + mName,
-      cloneLocation: path.resolve(path.join(process.cwd(), cm.PUBLISH_DIR, mName)),
-      dirSrc: path.resolve(path.join(process.cwd(), cm.BUILD_DIR, mName)),
+      cloneLocation: path.resolve(path.join(process.cwd(), cm.PUBLISH_DIR, 'subbower', mName)),
+      dirSrc: path.resolve(path.join(process.cwd(), cm.BUILD_DIR, 'subbower', mName)),
       message: 'Travis commit : build ' + process.env.TRAVIS_BUILD_NUMBER,
       push: allowPushOnRepo,
       tag: mName + '-' + cm.pkg.version
