@@ -129,6 +129,55 @@ It's acting in `out/clones/<branch_name>`.
  * Tags it with the current version (given by the package.json)
  * Push it (only on TravisCI for now)
 
+## Building configuration
+
+The component publisher can use a configuration file named `publish.js` to specify various thing to use while building the branches.  
+This file must return a object with the configuration like so :
+
+```javascript
+module.exports = function() {
+  return {
+    // ...
+  };
+};
+```
+
+This config object can content the following key:
+
+```javascript
+{
+  humaName : String,
+  // the name used as title in the gh-pages (ex: 'UI.Utils')
+
+  repoName : String,
+  // the repo name used in github links in the gh-pages (ex: 'ui-utils')
+
+  inlineHTML : String,
+  // The html to inline in the index.html file in the gh-pages
+  // (ex: 'Hello World' or fs.readFileSync(__dirname + '/demo/demo.html'))
+
+  inlineJS : String,
+  // The javascript to inline at the end of the index.html file in the gh-pages
+
+  js : Array.of(String),
+  // The css files to use in the gh-pages (ex: ['dist/ui-utils.js'])
+
+  css : Array.of(String),
+  // The css files to use in the gh-pages
+
+  tocopy : Array.of(String),
+  // Additional files to copy in the vendor directory in the gh-pages
+
+
+
+  main_dist_dir : String,
+  // directory used to store the main sources in the './dist' directory (ex: 'main')
+
+
+
+}
+```
+
 
 ## CLI flags
 
