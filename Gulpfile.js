@@ -6,6 +6,7 @@
 //////////////////////////////////////////////////////////////////////////////
 
 var gulp = require('gulp');
+var path = require('path');
 var cm = require('./lib/common');
 
 
@@ -28,6 +29,13 @@ gulp.task('clean', function(done) {
 
 gulp.task('build_gh-pages', build.ghpages);
 gulp.task('build_bower', build.bower);
+gulp.task('build_subbower', function(done){
+  var moduleNames = Object.keys(cm.public.subcomponents);
+  var almostDone = cm._.after(moduleNames.length, done);
+  for (var i = 0, n = moduleNames.length; i < n ; i++){
+    build.subbower(moduleNames[i], cm.public.subcomponents[moduleNames[i]])(almostDone);
+  }
+});
 
 
 var allowPushOnRepo = (process.env.TRAVIS == 'true') && (process.env.TRAVIS_PULL_REQUEST == 'false') && (process.env.TRAVIS_BRANCH == 'develop') && true;
@@ -52,6 +60,22 @@ gulp.task('publish_bower', function(cb){
     }, cb]);
   }else{
     publish.apply(this, [cb]);
+  }
+});
+
+gulp.task('publish_subbower', function(done){
+  var moduleNames = Object.keys(cm.public.subcomponents);
+  var almostDone = cm._.after(moduleNames.length, done);
+  for (var i = 0, n = moduleNames.length; i < n ; i++){
+    var mName = moduleNames[i];
+    publish.apply(this, [{
+      branch: 'bower-' + mName,
+      cloneLocation: path.resolve(path.join(process.cwd(), cm.PUBLISH_DIR, mName)),
+      dirSrc: path.resolve(path.join(process.cwd(), cm.BUILD_DIR, mName)),
+      message: 'Travis commit : build ' + process.env.TRAVIS_BUILD_NUMBER,
+      push: allowPushOnRepo,
+      tag: mName + '-' + cm.pkg.version
+    }, almostDone]);
   }
 });
 
